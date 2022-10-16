@@ -31,8 +31,7 @@ public class FolderController {
             @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
     private ResponseEntity<FolderDto> addFolder(@RequestBody FolderDto newFolder) {
-        FolderDto result = foldersService.createFolder(newFolder);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(foldersService.createFolder(newFolder));
     }
 
     @GetMapping
@@ -44,7 +43,6 @@ public class FolderController {
             @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
     public ResponseEntity<List<FolderDto>> getAllFolders() {
-        List<FolderDto> folderList = foldersService.getFolders();
-        return ResponseEntity.ok(folderList);
+        return ResponseEntity.ok(foldersService.getFolders());
     }
 }

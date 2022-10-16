@@ -35,8 +35,7 @@ public class RequestController {
             @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
     private ResponseEntity<RequestDto> addRequest(@RequestBody RequestDto newRequest) {
-        RequestDto result = requestService.createRequest(newRequest);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(requestService.createRequest(newRequest));
     }
 
     @PostMapping("/tag/{requestId}")
@@ -76,8 +75,7 @@ public class RequestController {
             @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
     public ResponseEntity<List<RequestDto>> getAllRequests() {
-        List<RequestDto> requestList = requestService.getRequests();
-        return ResponseEntity.ok(requestList);
+        return ResponseEntity.ok(requestService.getRequests());
     }
 
     @GetMapping("/byTag/{tagId}")
@@ -89,8 +87,7 @@ public class RequestController {
             @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
     public ResponseEntity<Set<RequestDto>> getRequestsByTag(@PathVariable Long tagId) {
-        Set<RequestDto> setRequest = requestService.getRequestsByTag(tagId);
-        return ResponseEntity.ok(setRequest);
+        return ResponseEntity.ok(requestService.getRequestsByTag(tagId));
     }
 
     @GetMapping("/byFolder/{folderId}")
@@ -102,13 +99,12 @@ public class RequestController {
             @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
     public ResponseEntity<List<RequestDto>> getRequestsByFolder(@PathVariable Long folderId) {
-        List<RequestDto> requestList = requestService.getRequestsByFolder(folderId);
-        return ResponseEntity.ok(requestList);
+        return ResponseEntity.ok(requestService.getRequestsByFolder(folderId));
     }
 
     @GetMapping("/byText")
-    public void getRequestByText(@RequestParam String text) {
-        requestService.getRequestByText(text);
-//        return ResponseEntity.ok(elasticRequest);
+    @Operation(summary = "Получение запроса по text")
+    public ResponseEntity<ElasticRequest> getRequestByText(@RequestParam String text) {
+        return ResponseEntity.ok(requestService.getRequestByText(text));
     }
 }

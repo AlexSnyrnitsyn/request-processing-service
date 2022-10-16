@@ -20,5 +20,5 @@ public interface RequestService {
 
     List<RequestDto> getRequestsByFolder(Long folderId);
 
-    void getRequestByText(String text);
+    ElasticRequest getRequestByText(String text);
 }

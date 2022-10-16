@@ -31,8 +31,7 @@ public class TagController {
             @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
     public ResponseEntity<TagDto> addTag(@RequestBody TagDto newTag) {
-        TagDto result = tagsService.createTag(newTag);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(tagsService.createTag(newTag));
     }
 
     @GetMapping
@@ -44,7 +43,6 @@ public class TagController {
             @ApiResponse(responseCode = "400", description = "Bad Request",
                     content = @Content)})
     public ResponseEntity<List<TagDto>> getAllTags() {
-        List<TagDto> tags = tagsService.getTags();
-        return ResponseEntity.ok(tags);
+        return ResponseEntity.ok(tagsService.getTags());
     }
 }

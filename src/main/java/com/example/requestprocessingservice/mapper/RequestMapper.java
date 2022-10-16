@@ -1,7 +1,6 @@
 package com.example.requestprocessingservice.mapper;
 
 import com.example.requestprocessingservice.dto.RequestDto;
-import com.example.requestprocessingservice.model.ElasticRequest;
 import com.example.requestprocessingservice.model.Request;
 import org.mapstruct.Mapper;
 
@@ -14,6 +13,4 @@ public interface RequestMapper {
     RequestDto requestToRequestDto(Request request);
     List<RequestDto> requestsToRequestsDto(List<Request> requestList);
     Set<RequestDto> requestsToRequestsDto(Set<Request> requests);
-//    RequestDto electricSearchToRequestDto(ElasticRequest elasticRequest);
-
 }

@@ -102,11 +102,10 @@ public class RequestServiceImp implements RequestService{
     }
 
     @Override
-    public void getRequestByText(String text) {
+    public ElasticRequest getRequestByText(String text) {
         log.info("get requestListByFolder begin");
         ElasticRequest elasticRequest = requestElasticRepository.findByText(text);
         log.info("requestList get success");
-//        return elasticRequest;
-//        return requestMapper.electricSearchToRequestDto(elasticRequest);
+        return elasticRequest;
     }
 }
