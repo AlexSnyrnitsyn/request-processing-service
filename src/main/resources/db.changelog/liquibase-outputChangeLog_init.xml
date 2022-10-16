@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Alexandro (generated)" id="1665902666678-1">
+        <createSequence sequenceName="folder_id_seq"/>
+    </changeSet>
+    <changeSet author="Alexandro (generated)" id="1665902666678-2">
+        <createSequence sequenceName="request_id_seq"/>
+    </changeSet>
+    <changeSet author="Alexandro (generated)" id="1665902666678-3">
+        <createSequence sequenceName="tag_id_seq"/>
+    </changeSet>
+    <changeSet author="Alexandro (generated)" id="1665902666678-4">
+        <createTable tableName="folder">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="folder_pkey"/>
+            </column>
+            <column name="folder_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alexandro (generated)" id="1665902666678-5">
+        <createTable tableName="request">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="request_pkey"/>
+            </column>
+            <column name="length" type="BIGINT"/>
+            <column name="modified_date" type="BIGINT"/>
+            <column name="text" type="VARCHAR(255)"/>
+            <column name="folder_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alexandro (generated)" id="1665902666678-6">
+        <createTable tableName="request_tag">
+            <column name="request_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tag_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alexandro (generated)" id="1665902666678-7">
+        <createTable tableName="tag">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="tag_pkey"/>
+            </column>
+            <column name="tag_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Alexandro (generated)" id="1665902666678-8">
+        <addPrimaryKey columnNames="request_id, tag_id" constraintName="request_tag_pkey" tableName="request_tag"/>
+    </changeSet>
+    <changeSet author="Alexandro (generated)" id="1665902666678-9">
+        <addForeignKeyConstraint baseColumnNames="request_id" baseTableName="request_tag" constraintName="fk4qg9kwomafwde09eeel2cjtyt" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="request"/>
+    </changeSet>
+    <changeSet author="Alexandro (generated)" id="1665902666678-10">
+        <addForeignKeyConstraint baseColumnNames="tag_id" baseTableName="request_tag" constraintName="fk6mcaoumbq73rw5ps8yvi24wde" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tag"/>
+    </changeSet>
+    <changeSet author="Alexandro (generated)" id="1665902666678-11">
+        <addForeignKeyConstraint baseColumnNames="folder_id" baseTableName="request" constraintName="fkt7fsoh1ck2b2c5bswf6ko8ssf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="folder"/>
+    </changeSet>
+</databaseChangeLog>
