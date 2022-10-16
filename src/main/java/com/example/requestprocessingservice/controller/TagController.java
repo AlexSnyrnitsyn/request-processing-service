@@ -1,6 +1,5 @@
 package com.example.requestprocessingservice.controller;
 
-import com.example.requestprocessingservice.dto.FolderDto;
 import com.example.requestprocessingservice.dto.TagDto;
 import com.example.requestprocessingservice.service.TagService;
 import io.swagger.v3.oas.annotations.Operation;

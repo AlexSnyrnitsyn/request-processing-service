@@ -1,9 +1,11 @@
 package com.example.requestprocessingservice.service;
 
 import com.example.requestprocessingservice.dto.RequestDto;
+import com.example.requestprocessingservice.elasticrepository.RequestElasticRepository;
 import com.example.requestprocessingservice.enums.ResponseCode;
 import com.example.requestprocessingservice.error.EntityNotFoundException;
 import com.example.requestprocessingservice.mapper.RequestMapper;
+import com.example.requestprocessingservice.model.ElasticRequest;
 import com.example.requestprocessingservice.model.Folder;
 import com.example.requestprocessingservice.model.Request;
 import com.example.requestprocessingservice.model.Tag;
@@ -29,6 +31,7 @@ public class RequestServiceImp implements RequestService{
     private final FolderRepository folderRepository;
     private final TagRepository tagsRepository;
     private final RequestMapper requestMapper;
+    private final RequestElasticRepository requestElasticRepository;
     @Value("${tag.limit}")
     private int tagLimit;
 
@@ -37,6 +40,8 @@ public class RequestServiceImp implements RequestService{
         log.info("add request begin");
         Request request = requestMapper.requestDtoToRequest(requestDto);
         requestRepository.save(request);
+        requestElasticRepository.save(ElasticRequest.builder().id(request.getId()).text(request.getText()).
+                modifiedDate(request.getModifiedDate()).length(request.getLength()).build());
         log.info("request add success");
         return requestMapper.requestToRequestDto(request);
     }
@@ -94,5 +99,14 @@ public class RequestServiceImp implements RequestService{
         List<Request> requestList = requestRepository.findByFolder_Id(folderId);
         log.info("requestList get success");
         return requestMapper.requestsToRequestsDto(requestList);
+    }
+
+    @Override
+    public void getRequestByText(String text) {
+        log.info("get requestListByFolder begin");
+        ElasticRequest elasticRequest = requestElasticRepository.findByText(text);
+        log.info("requestList get success");
+//        return elasticRequest;
+//        return requestMapper.electricSearchToRequestDto(elasticRequest);
     }
 }

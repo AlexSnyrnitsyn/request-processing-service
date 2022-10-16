@@ -3,6 +3,7 @@ package com.example.requestprocessingservice.controller;
 import com.example.requestprocessingservice.dto.FolderDto;
 import com.example.requestprocessingservice.dto.RequestDto;
 import com.example.requestprocessingservice.dto.TagDto;
+import com.example.requestprocessingservice.model.ElasticRequest;
 import com.example.requestprocessingservice.service.RequestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -103,5 +104,11 @@ public class RequestController {
     public ResponseEntity<List<RequestDto>> getRequestsByFolder(@PathVariable Long folderId) {
         List<RequestDto> requestList = requestService.getRequestsByFolder(folderId);
         return ResponseEntity.ok(requestList);
+    }
+
+    @GetMapping("/byText")
+    public void getRequestByText(@RequestParam String text) {
+        requestService.getRequestByText(text);
+//        return ResponseEntity.ok(elasticRequest);
     }
 }
